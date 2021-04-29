@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout::site-head">
+	<title>créer un compte</title>
+</head>
+
+<body>
+	<nav th:replace="layout::site-generic-nav" th:remove="tag"></nav>
+
+	<div class="container" style="margin-top:100px;">
+	    <h2>Créer votre compte utilisateur</h2><br/>
+		<form action="#" th:action="@{/users/register}" th:object="${user}" method="post" class="form col-md-5 col-md-offset-7">			
+		  <div class="control-group">
+            <div class="form-group floating-label-form-group controls">			
+				<input autofocus="autofocus" type="text" th:field="*{userName}" placeholder="nom d'utilisateur" th:class="${#fields.hasErrors('userName') ? 'form-control is-invalid' : 'form-control'}" required data-validation-required-message="S'il vous-plait entrer votre nom d'utilisateur." />
+				<div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" class="invalid-feedback"></div> 
+			</div><!-- User Name -->
+		 </div>
+		 <div class="control-group">
+            <div class="form-group floating-label-form-group controls">		
+				<input type="password" th:field="*{passwordHash}" placeholder="mot de passe" th:class="${#fields.hasErrors('passwordHash') ? 'form-control is-invalid' : 'form-control'}" required data-validation-required-message="S'il vous-plait entrer un mot de passe valide"/> 
+				<div th:if="${#fields.hasErrors('passwordHash')}" th:errors="*{passwordHash}" class="invalid-feedback"></div>
+			</div><!-- Password -->
+		 </div>
+		 <div class="control-group">
+            <div class="form-group floating-label-form-group controls">		
+				<input type="text" th:field="*{fullName}" placeholder="nom" th:class="${#fields.hasErrors('fullName') ? 'form-control is-invalid' : 'form-control'}" required data-validation-required-message="S'il vous-plait entrer votre prénom"/>
+				<label th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}" class="invalid-feedback"></label> 
+			</div><!-- Full Name -->
+		 </div>
+		 <div class="control-group">
+            <div class="form-group floating-label-form-group controls">				 
+				<input type="text" th:field="*{lastName}" placeholder="prenom" th:class="${#fields.hasErrors('lastName') ? 'form-control is-invalid' : 'form-control'}" required data-validation-required-message="S'il vous-plait entrer votre nom"/>
+				<label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="invalid-feedback"></label> 
+			</div>
+		 </div>
+		 <br>
+			<div class="form-group clearfix">
+				<button type="submit" class="btn btn-primary">Créer votre compte</button>
+			</div><!-- Submit Button -->
+			<div class="form-group">
+				<div th:class="${successMessage} ? 'alert alert-success' : ''" th:text="${successMessage}"></div>
+			</div><!-- Success message -->
+		</form>		
+	</div>	
+	<footer th:replace="layout::site-footer"></footer>
+</body>
+</html>

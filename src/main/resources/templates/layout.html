@@ -1,0 +1,319 @@
+<!--  <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="site-head">
+	<meta charset="UTF-8" />
+	<title>SpringBoot-Blog</title>	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	
+
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+     
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+     
+	 <link rel="icon" href="../public/img/favicon.ico" th:href="@{/img/favicon.ico}" />
+     <link rel="stylesheet" href="../public/css/styles.css" th:href="@{/css/styles.css}" />
+
+	<script src="../public/js/blog-scripts.js" th:src="@{/js/blog-scripts.js}"></script>	
+		
+</head>
+<body>
+	<header th:fragment="site-header" th:remove="tag">
+		<header>
+			<a href="index.html" th:href="@{/}"><img src="../public/img/site-logo.png" th:src="@{/img/site-logo.png}" /></a>
+			<a href="index.html" th:href="@{/}">Accueil</a>
+			<a href="posts/index.html" th:href="@{/posts}">Postes</a>
+			<span sec:authorize="isAuthenticated()">
+				<a href="posts/create.html" th:href="@{/posts/create}">Créer un poste</a>
+				<a sec:authorize="hasAuthority('ADMIN')" href="users/index.html" th:href="@{/users}">Utilisateurs</a>								
+			</span>			
+			<div id="logged-in-info">
+				<div sec:authorize="isAuthenticated()">
+					<span>Hello, <b sec:authentication="name"></b>
+						Roles: <span sec:authentication="principal.authorities"></span>
+					</span>
+					<a ref="#" th:href="@{/users/logout}"><span class="fa fa-sign-out"></span>&nbsp;[Se Déconnecter]</a>
+				</div>
+				<div sec:authorize="!isAuthenticated()">
+					<a href="users/login.html" th:href="@{/users/login}">Se Connecter</a>
+					<a href="users/register.html" th:href="@{/users/register}">Créer un compte</a>
+				</div>
+			</div>		
+		</header>
+		
+		<ul id="messages" th:with="notifyMessages=${session[T(spring.blog.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">			
+			<li th:each="msg : ${notifyMessages}" th:text="${msg.text}" th:class="${msg.type.toString().toLowerCase()}"></li>			
+			<span th:if="${notifyMessages}" th:remove="all" th:text="${#session.removeAttribute(T(spring.blog.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>
+		</ul>
+		
+	</header>
+	<h1>Bienvenue</h1>
+	<p>Bienvenue au Blog MP_IHM.</p>
+	<footer th:fragment="site-footer">&copy; MP_IHM ISI BLOG 2021</footer>	
+</body>
+</html>-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="site-head">
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Mini Pojet IHM ISI</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../public/vendor/bootstrap/css/bootstrap.min.css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="../public/vendor/fontawesome-free/css/all.min.css" th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+
+  <!-- Custom styles for this template -->
+
+ 
+  <!-- Custom styles for this template -->
+  <link href="../public/css/clean-blog.min.css" th:href="@{/css/clean-blog.min.css}"   rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+
+  <nav th:fragment="site-nav" class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav" >
+    <div class="container-fluid">
+      <a class="navbar-brand" th:href="@{/}">MINI-PROJET-IHM-ISI</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav mr-2">
+          <li class="nav-item">
+            <a class="nav-link" href="new-index.html" th:href="@{/}">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="posts/index.html" th:href="@{/posts}">Postes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html" th:href="@{/about}">A propos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html" th:href="@{/contact}">Contact</a>
+          </li>
+          <!--  <li class="nav-item">
+        	<span sec:authorize="isAuthenticated()">
+				<a class="nav-link"  href="posts/create.html" th:href="@{/posts/create}">Créer un poste</a>
+				<a class="nav-link"  sec:authorize="hasAuthority('ADMIN')" href="users/index.html" th:href="@{/users}">Utilisateurs</a>								
+			</span>	
+          </li>-->
+          
+          <!--<li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>-->
+        </ul>
+      <ul class="navbar-nav ml-5">
+		<li class="nav-item">
+		  <span sec:authorize="isAuthenticated()">Bienvenue <b sec:authentication="name"></b>
+			 <!-- Roles: <span sec:authentication="principal.authorities"></span> --> 
+		  </span>
+		</li>
+		<li class="nav-item">
+		   <a sec:authorize="isAuthenticated()" class="nav-link"  ref="#" th:href="@{/users/logout}"><span class="fa fa-sign-out"></span>&nbsp;[Se Déconnecter]</a>
+		</li>
+		<li class="nav-item">
+		  <a sec:authorize="!isAuthenticated()" class="nav-link"  href="users/login.html" th:href="@{/users/login}">Se Connecter</a>
+		</li>
+		<li class="nav-item">
+		  <a sec:authorize="!isAuthenticated()" class="nav-link"  href="users/register.html" th:href="@{/users/register}">Créer un compte</a>
+		</li>
+	 </ul>	
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Navbar for all other views other than index (home page) -->
+  
+  <nav id="mainNavCustom" th:fragment="site-generic-nav" class="navbar navbar-expand-lg navbar-light bg-light"  >
+    <div class="container-fluid">
+      <a class="navbar-brand" th:href="@{/}">MINI-PROJET-IHM-ISI</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav mr-2">
+          <li class="nav-item">
+           <a class="nav-link" href="new-index.html" th:href="@{/}">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="posts/index.html" th:href="@{/posts}">Postes</a>
+          </li>
+             <li class="nav-item">
+            <a class="nav-link" href="about.html" th:href="@{/about}">A propos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html" th:href="@{/contact}">Contact</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav  ml-5" >
+		 <li class="nav-item">
+		  <span sec:authorize="isAuthenticated()">Bienvenue <b sec:authentication="name"></b>
+			 <!-- Roles: <span sec:authentication="principal.authorities"></span> --> 
+		  </span>
+		 </li>
+		 <li class="nav-item">
+		   <a sec:authorize="isAuthenticated()" class="nav-link"  ref="#" th:href="@{/users/logout}"><span class="fa fa-sign-out"></span>&nbsp;[Se Déconnecter]</a>
+		 </li>
+		 <li class="nav-item">
+		  <a sec:authorize="!isAuthenticated()" class="nav-link"  href="users/login.html" th:href="@{/users/login}">Se Connecter</a>
+		 </li>
+		 <li class="nav-item">
+		  <a sec:authorize="!isAuthenticated()" class="nav-link"  href="users/register.html" th:href="@{/users/register}">Créer un compte</a>
+		 </li>
+	   </ul>	
+      </div>
+    </div>
+  </nav>
+  
+
+  <!-- Page Header -->
+  <header th:fragment="site-header"   class="masthead" style="background-image: url('http://localhost:8090/img/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Bienvenue Sur Mon Blog</h1>
+            <span class="subheading">Tous ce que vous besoin est la!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <ul id="messages" th:with="notifyMessages=${session[T(spring.blog.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">			
+		<li th:each="msg : ${notifyMessages}" th:text="${msg.text}" th:class="${msg.type.toString().toLowerCase()}"></li>			
+		<span th:if="${notifyMessages}" th:remove="all" th:text="${#session.removeAttribute(T(spring.blog.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>
+  </ul>
+
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-preview">
+          <a href="post.html">
+            <h2 class="post-title">
+              Man must explore, and this is exploration at its greatest
+            </h2>
+            <h3 class="post-subtitle">
+              Problems look mighty small from 150 miles up
+            </h3>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">Start Bootstrap</a>
+            on September 24, 2019</p>
+        </div>
+        <hr>
+        <div class="post-preview">
+          <a href="post.html">
+            <h2 class="post-title">
+              I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.
+            </h2>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">Start Bootstrap</a>
+            on September 18, 2019</p>
+        </div>
+        <hr>
+        <div class="post-preview">
+          <a href="post.html">
+            <h2 class="post-title">
+              Science has not yet mastered prophecy
+            </h2>
+            <h3 class="post-subtitle">
+              We predict too much for the next year and yet far too little for the next ten.
+            </h3>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">Start Bootstrap</a>
+            on August 24, 2019</p>
+        </div>
+        <hr>
+        <div class="post-preview">
+          <a href="post.html">
+            <h2 class="post-title">
+              Failure is not an option
+            </h2>
+            <h3 class="post-subtitle">
+              Many say exploration is part of our destiny, but it’s actually our duty to future generations.
+            </h3>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">Start Bootstrap</a>
+            on July 8, 2019</p>
+        </div>
+        <hr>
+        <!-- Pager -->
+        <div class="clearfix">
+          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Footer -->
+  <footer th:fragment="site-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <ul class="list-inline text-center">
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+          </ul>
+          <p class="copyright text-muted">Copyright &copy; Mini Projet IHM ISI 2021</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../public/vendor/jquery/jquery.min.js" th:src="@{/vendor/jquery/jquery.min.js}"></script>
+  <script src="../public/vendor/bootstrap/js/bootstrap.bundle.min.js" th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <!-- Custom scripts for this template -->
+  <script src="../public/js/clean-blog.min.js" th:src="@{/js/clean-blog.min.js}"></script>
+
+</body>
+
+</html>
