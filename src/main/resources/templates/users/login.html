@@ -18,16 +18,24 @@
 		  	  <input autofocus="autofocus" placeholder="nom d'utilisateur" type="text" id="userName" name="userName" class="form-control" required data-validation-required-message="S'i vous-plait entrer votre nom d'utilisateur."/>
 		    </div><!-- User name -->	  
 		  </div>
-		  <div class="ontrol-group">
+		  <div class="control-group">
 		    <div class="form-group floating-label-form-group controls">
 		  	 <label for="password">Mot de passe </label>
 		  	 <input placeholder="mot de passe" type="password" id="passwordHash" name="passwordHash" class="form-control" required data-validation-required-message="S'i vous-plait entrer votre mot de passe."/>		  	
 		    </div><!-- Password -->		  
 		  </div>
+		 
+		  <br>
+		
+		 <div class="form-group">
+		  	<label for="rememberMe">Se souvener de moi</label>
+		  	<input style="margin-left:0px;" type="checkbox" id="rememberMe" name="rememberMe" class="form-control" />		  	
+		 </div>		  
+		  
 		   <br>
           <div id="success"></div>
 		  <div class="form-group">
-		  	<input type="submit" class="btn btn-primary pull-right" value="Se connecter"/>
+		  	<input type="submit" class="btn btn-primary pull-right" id="submit" value="Se connecter"/>
 		  	<br>
 		  	<a href="register.html" th:href="@{/users/register}">[Créer un compte ]</a>
 		  </div><!-- Submit Button -->		  
@@ -41,6 +49,39 @@
     <script src="../public/vendor/bootstrap/js/bootstrap.bundle.min.js" th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
   <!-- Custom scripts for this template -->
     <script src="../public/js/clean-blog.min.js" th:src="@{/js/clean-blog.min.js}"></script>
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+    
+<script type="text/javascript">
 
+$(function() {
+  var un=  window.localStorage.getItem("username");
+  var pwd = window.localStorage.getItem("pwd");
+  if(un && pwd) {
+     $("#rememberMe").attr("checked","checked");
+     $("#userName").val(un);
+     $("#passwordHash").val(CryptoJS.AES.decrypt(pwd, "Secret Passphrase").toString(CryptoJS.enc.Utf8));
+  }
+});
+
+$('#submit').on('click',function() {
+         doJOB();
+});
+
+function doJOB() {
+ 
+  var un= $("#userName").val();
+  var pwd = $("#passwordHash").val();
+  var rememberMeChecked = $("#rememberMe").is(":checked");
+  if(rememberMeChecked) {
+     window.localStorage.removeItem("username");
+     window.localStorage.removeItem("pwd");
+     window.localStorage.setItem("username", un);
+     window.localStorage.setItem("pwd", CryptoJS.AES.encrypt(pwd, "Secret Passphrase"));
+  }else{
+     window.localStorage.removeItem("username");
+     window.localStorage.removeItem("pwd");
+  }
+}
+</script>
+</body>
 </html>

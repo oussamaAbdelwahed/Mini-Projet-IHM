@@ -403,3 +403,263 @@ footer .copyright {
   font-size: 16px;
   padding: 25px 35px;
 }
+
+card-img {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.card-title {
+  margin-bottom: 0.3rem;
+}
+
+.cat {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.fa-users {
+  margin-left: 1rem;
+}
+
+.card-footer {
+  font-size: 0.8rem;
+}
+.rating-loading {
+  width: 25px;
+  height: 25px;
+  font-size: 0;
+  color: #fff;
+  background: url(../img/loading.gif) top left no-repeat;
+  border: none;
+}
+
+.rating-container .rating-stars {
+  position: relative;
+  cursor: pointer;
+  vertical-align: middle;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.rating-container .rating-input {
+  position: absolute;
+  cursor: pointer;
+  width: 100%;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  font-size: 1px;
+  border: none;
+  background: 0 0;
+  padding: 0;
+  margin: 0;
+}
+
+.rating-disabled .rating-input, .rating-disabled .rating-stars {
+  cursor: not-allowed;
+}
+
+.rating-container .star {
+  display: inline-block;
+  margin: 0 3px;
+  text-align: center;
+}
+.rating-container .empty-stars {
+  color: #aaa;
+}
+.rating-container .filled-stars {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: auto;
+  color: #fde16d;
+  white-space: nowrap;
+  overflow: hidden;
+  -webkit-text-stroke: 1px #777;
+  text-shadow: 1px 1px #999;
+}
+
+.rating-rtl {
+  float: right;
+}
+
+.rating-animate .filled-stars {
+  transition: width 0.25s ease;
+  -o-transition: width 0.25s ease;
+  -moz-transition: width 0.25s ease;
+  -webkit-transition: width 0.25s ease;
+}
+
+.rating-rtl .filled-stars {
+  left: auto;
+  right: 0;
+  -moz-transform: matrix(-1, 0, 0, 1, 0, 0) translate3d(0, 0, 0);
+  -webkit-transform: matrix(-1, 0, 0, 1, 0, 0) translate3d(0, 0, 0);
+  -o-transform: matrix(-1, 0, 0, 1, 0, 0) translate3d(0, 0, 0);
+  transform: matrix(-1, 0, 0, 1, 0, 0) translate3d(0, 0, 0);
+}
+.rating-rtl.is-star .filled-stars {
+  right: 0.06em;
+}
+.rating-rtl.is-heart .empty-stars {
+  margin-right: 0.07em;
+}
+
+.rating-lg {
+  font-size: 3.91em;
+}
+
+.rating-md {
+  font-size: 3.13em;
+}
+
+.rating-sm {
+  font-size: 2.5em;
+}
+
+.rating-xs {
+  font-size: 2em;
+}
+
+.rating-xl {
+  font-size: 4.89em;
+}
+
+.rating-container .clear-rating {
+  color: #aaa;
+  cursor: not-allowed;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 60%;
+  padding-right: 5px;
+}
+
+.clear-rating-active {
+  cursor: pointer !important;
+}
+.clear-rating-active:hover {
+  color: #843534;
+}
+
+.rating-container .caption {
+  color: #999;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 60%;
+  margin-top: -0.6em;
+  margin-left: 5px;
+  margin-right: 0;
+}
+
+.rating-rtl .caption {
+  margin-right: 5px;
+  margin-left: 0;
+}
+
+@media print {
+  .rating-container .clear-rating {
+    display: none;
+  }
+}
+.empty-star {
+  color: #dee2e6;
+}
+
+.rating-container .filled-stars {
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+  color: #ffca00;
+}
+
+.progress {
+  margin-top: 1rem;
+  border-radius: 0;
+}
+
+.progress-bar {
+  background-color: #ffca00;
+}
+.card-link {
+  position: relative;
+}
+
+
+#button {
+  display: inline-block;
+  background-color: #FF9800;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 4px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  transition: background-color .3s, 
+    opacity .5s, visibility .5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+}
+#button::after {
+  content: "\f077";
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2em;
+  line-height: 50px;
+  color: #fff;
+}
+#button:hover {
+  cursor: pointer;
+  background-color: #333;
+}
+#button:active {
+  background-color: #555;
+}
+#button.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+@media (min-width: 500px) {
+  
+  #button {
+    margin: 30px;
+  }
+}
+
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9;
+}
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
+

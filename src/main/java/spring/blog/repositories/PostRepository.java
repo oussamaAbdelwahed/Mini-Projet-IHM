@@ -15,4 +15,6 @@ import org.springframework.stereotype.Repository;
 public interface PostRepository extends JpaRepository<Post, Long> {
 	@Query(value="SELECT p.* FROM posts p ORDER BY p.date DESC", nativeQuery = true)	
 	List<Post> findLates5Posts(Pageable pageable);	
+	
+	List<Post> findByTitleContainingIgnoreCaseOrBodyContainingIgnoreCaseOrAuthorFullNameContainingIgnoreCaseOrAuthorLastNameContainingIgnoreCase(String sq1,String sq2,String sq3,String sq4);
 }

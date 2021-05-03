@@ -21,4 +21,5 @@ public interface PostService {
 	Post create(Post post);
 	Post edit(Post post);
 	void deleteById(Long id);
+	List<Post> searchForPosts(String searchQuery);
 }

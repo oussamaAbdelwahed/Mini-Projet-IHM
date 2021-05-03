@@ -71,8 +71,8 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <div class="post-preview" th:each="p : ${latest5Posts}">
-          <a href="post.html">
+        <!--  <div class="post-preview" th:each="p : ${latest5Posts}">
+          <a href="post.html" th:href="@{'/posts/view/'+${p.id}}">
             <h2 class="post-title" th:text="${p.title}">
               Man must explore, and this is exploration at its greatest
             </h2>
@@ -82,14 +82,47 @@
             </p>
             <span th:if="${p.author}" th:remove="tag">
           </a>
-          <span th:if="${p.author}" th:remove="tag" class="post-meta"><i><b>Ecrit par: </b></i>
+          <span th:if="${p.author}" th:remove="tag" class="post-meta"><i><b>Ecrit par</b></i>
             <span th:text="${p.author.fullName != null ? p.author.fullName : p.author.userName}">Svetlin Nakov</span>  
              <br>
-             <i><b>Posté le: </b></i>
+             <i><b>Posté le</b></i>
 	         <span th:text="${#dates.format(p.date, 'dd-MMM-yyyy')}">22-May-2016</span>
           </span>
           
+        </div>-->
+        
+       <div class="card" th:each="p : ${latest5Posts}" style="margin-bottom:20px;">
+        <img class="card-img" th:src="${p.imageURL}" alt="Bologna"/>
+        <div class="card-img-overlay">
+         <!-- <a href="#" class="btn btn-light btn-sm" th:href="@{'/posts/view/'+${p.id}}">Lire suite ...</a>-->
         </div>
+        <div class="card-body">
+          <h4 class="card-title" th:text="${p.title}">Pasta with Prosciutto</h4>
+          <small class="text-muted cat">
+            <i class="far fa-clock text-info"></i> 30 minutes
+            <i class="fas fa-users text-info"></i> 4 portions
+          </small>
+          <p class="card-text" th:utext="${p.body}" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">I love quick, simple pasta dishes, and this is one of my favorite.</p>
+          <span th:if="${p.author}" th:remove="tag" class="post-meta"><i><b>Ecrit par</b></i>
+            <span th:text="${p.author.fullName != null ? p.author.fullName : p.author.userName}">Svetlin Nakov</span>  
+             <br>
+             <i><b>Posté le</b></i>
+	         <span th:text="${#dates.format(p.date, 'dd-MMM-yyyy')}">22-May-2016</span>
+          </span>
+          <br><br>
+          <a href="#" class="btn btn-success btn-sm card-link"  th:href="@{'/posts/view/'+${p.id}}">Lire suite ...</a>
+        </div>
+        <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
+          <div class="views"><span th:text="${#dates.format(p.date, 'dd-MMM-yyyy')}">22-May-2016</span>
+          </div>
+          <div class="stats">
+           	<i class="far fa-eye"></i> 1347
+            <i class="far fa-comment"></i> 12
+            <i class="fas fa-quote-right"></i> 5
+          </div>
+           
+        </div>
+      </div>
         
         <!-- 
 		<article th:each="p : ${latest3Posts}">
@@ -110,7 +143,7 @@
         
         <!-- Pager -->
         <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Voir plus ... &rarr;</a>
+          <a class="btn btn-primary float-right" th:href="@{/posts}">Voir plus ... &rarr;</a>
         </div>
       </div>
     </div>

@@ -1,17 +1,23 @@
 package spring.blog.controllers;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,15 +39,28 @@ public class PostsController {
 	@Autowired
 	private UserService userService;
 	
+	
+	@RequestMapping(value = "/posts/find", method = RequestMethod.POST,consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public String findPost(Model model,@RequestBody MultiValueMap<String,String> formData, BindingResult bindingResult){
+		String searchQuery = formData.getFirst("search");
+		List<Post> result = this.postService.searchForPosts(searchQuery);
+		if(result.size()==0 ){
+			model.addAttribute("errorMessage","aucun poste ne correspond a votre recherche '"+searchQuery+"'");
+		   //notifyService.addErrorMessage();
+		}
+		model.addAttribute("posts", result);
+		return "posts/show-search-posts";		
+	}
+	
 
 	@RequestMapping("/posts/view/{id}")
 	public String view(@PathVariable("id") Long id, Model model){
 		Post post = this.postService.findById(id);
 		if( post == null ){
-			notifyService.addErrorMessage("Cannot find post #" + id);
+			notifyService.addErrorMessage("Le post n'est pas trouvable avec l' id #" + id);
 			return "redirect:/";
 		}		
-		model.addAttribute("post", post);
+		model.addAttribute("p", post);
 		// To have something like src/main/resources/templates/<CONTROLLER-NAME>/<Mapping-Name-view>
 		return "posts/view";		
 	}

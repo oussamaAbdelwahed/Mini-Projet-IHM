@@ -37,6 +37,11 @@ public class PostServiceStub implements PostService{
 		add(new Post(5L, "Post Number 5", "<p>Just posting</p>", null));
 		add(new Post(6L, "Sixth Post", "<p>Another interesting post</p>", null));
 	}};
+	
+	@Override
+	public List<Post> searchForPosts(String searchQuery) {
+		return this.posts;
+	}
 
 	/* (non-Javadoc)
 	 * @see spring.blog.services.PostService#findAll()

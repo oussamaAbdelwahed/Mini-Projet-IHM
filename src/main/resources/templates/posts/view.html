@@ -6,23 +6,43 @@
 </head>
 
 <body>
-	<header th:replace="layout::site-header"></header>
-
+	<nav th:replace="layout::site-generic-nav"></nav>
+    <div class="container" style="margin-top:100px;">
 	<main id="posts">
-	  <article>
-	    <h2 class="title" th:text="${post.title}">Titre Poste</h2>
-	    <img style="height:150px;width:150px;" th:src="${post.imageURL}" alt="image de l'article"/>
-	    <div class="date">
-		    <i>Posté le</i>
-		    <span th:text="${#dates.format(post.date, 'dd-MMM-yyyy')}">22-May-2016</span>
-		    <span th:if="${post.author}" th:remove="tag">
-		    	<i>Ecrit par</i>
-		        <span th:text="${post.author.fullName != null ? post.author.fullName : post.author.userName}">Svetlin Nakov</span>
-		    </span>
-	    </div>
-	    <p class="content" th:utext="${post.body}">Contenu du Poste</p>
-	  </article>
+	
+       <div class="card" style="margin-bottom:20px;">
+        <img class="card-img" th:src="${p.imageURL}" alt="Bologna"/>
+        <div class="card-img-overlay">
+         <!-- <a href="#" class="btn btn-light btn-sm" th:href="@{'/posts/view/'+${p.id}}">Lire suite ...</a>-->
+        </div>
+        <div class="card-body">
+          <h4 class="card-title" th:text="${p.title}">Pasta with Prosciutto</h4>
+          <small class="text-muted cat">
+            <i class="far fa-clock text-info"></i> 30 minutes
+            <i class="fas fa-users text-info"></i> 4 portions
+          </small>
+          <p class="card-text" th:utext="${p.body}" >I love quick, simple pasta dishes, and this is one of my favorite.</p>
+          <span th:if="${p.author}" th:remove="tag" class="post-meta"><i><b>Ecrit par</b></i>
+            <span th:text="${p.author.fullName != null ? p.author.fullName : p.author.userName}">Svetlin Nakov</span>  
+             <br>
+             <i><b>Posté le</b></i>
+	         <span th:text="${#dates.format(p.date, 'dd-MMM-yyyy')}">22-May-2016</span>
+          </span>
+          <br><br>
+        </div>
+        <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
+          <div class="views"><span th:text="${#dates.format(p.date, 'dd-MMM-yyyy')}">22-May-2016</span>
+          </div>
+          <div class="stats">
+           	<i class="far fa-eye"></i> 1347
+            <i class="far fa-comment"></i> 12
+            <i class="fas fa-quote-right"></i> 5
+          </div>
+           
+        </div>
+      </div>
 	</main>
+	</div>
 
 	<footer th:replace="layout::site-footer"></footer>
 </body>

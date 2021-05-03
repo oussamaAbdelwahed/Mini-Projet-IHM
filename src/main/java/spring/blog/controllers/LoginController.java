@@ -58,11 +58,11 @@ public class LoginController {
 		User userExists = this.userService.findByUserName(user.getUserName());
 		modelAndView.setViewName("users/register");
 		if( userExists != null ){
-			bindingResult.rejectValue("userName", "error.user", "User exists");
+			bindingResult.rejectValue("userName", "error.user", "Utilisateur existant");
 		}
 		if( !bindingResult.hasErrors() ){
 			this.userService.create(user);
-			modelAndView.addObject("successMessage", "User has been created");
+			modelAndView.addObject("successMessage", "Utilisateur crée avec succes");
 			modelAndView.addObject("user", new User());
 		}
 		return modelAndView;

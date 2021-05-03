@@ -10,40 +10,153 @@
 
 	<div class="container" style="margin-top:100px;">
 	    <h2>Créer votre compte utilisateur</h2><br/>
-		<form action="#" th:action="@{/users/register}" th:object="${user}" method="post" class="form col-md-5 col-md-offset-7">			
-		  <div class="control-group">
-            <div class="form-group floating-label-form-group controls">			
-				<input autofocus="autofocus" type="text" th:field="*{userName}" placeholder="nom d'utilisateur" th:class="${#fields.hasErrors('userName') ? 'form-control is-invalid' : 'form-control'}" required data-validation-required-message="S'il vous-plait entrer votre nom d'utilisateur." />
-				<div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" class="invalid-feedback"></div> 
-			</div><!-- User Name -->
-		 </div>
-		 <div class="control-group">
+		<form action="#" th:action="@{/users/register}" th:object="${user}" method="post" class="form col-md-5 col-md-offset-7" autocomplete="off">			
+		<div class="control-group"><span class="text text-primary">* tous les champs sont obligatoires</span></div>
+		 
+		<div class="control-group">
             <div class="form-group floating-label-form-group controls">		
-				<input type="password" th:field="*{passwordHash}" placeholder="mot de passe" th:class="${#fields.hasErrors('passwordHash') ? 'form-control is-invalid' : 'form-control'}" required data-validation-required-message="S'il vous-plait entrer un mot de passe valide"/> 
-				<div th:if="${#fields.hasErrors('passwordHash')}" th:errors="*{passwordHash}" class="invalid-feedback"></div>
-			</div><!-- Password -->
-		 </div>
-		 <div class="control-group">
-            <div class="form-group floating-label-form-group controls">		
-				<input type="text" th:field="*{fullName}" placeholder="nom" th:class="${#fields.hasErrors('fullName') ? 'form-control is-invalid' : 'form-control'}" required data-validation-required-message="S'il vous-plait entrer votre prénom"/>
+				<input  autofocus="autofocus" type="text" th:field="*{fullName}" placeholder="* nom" th:class="${#fields.hasErrors('fullName') ? 'form-control is-invalid' : 'form-control'}" required data-validation-required-message="S'il vous-plait entrer votre prénom"/>
 				<label th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}" class="invalid-feedback"></label> 
 			</div><!-- Full Name -->
 		 </div>
 		 <div class="control-group">
             <div class="form-group floating-label-form-group controls">				 
-				<input type="text" th:field="*{lastName}" placeholder="prenom" th:class="${#fields.hasErrors('lastName') ? 'form-control is-invalid' : 'form-control'}" required data-validation-required-message="S'il vous-plait entrer votre nom"/>
+				<input type="text" th:field="*{lastName}" placeholder="* prenom" th:class="${#fields.hasErrors('lastName') ? 'form-control is-invalid' : 'form-control'}" required data-validation-required-message="S'il vous-plait entrer votre nom"/>
 				<label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="invalid-feedback"></label> 
 			</div>
 		 </div>
+		 <div class="control-group">
+            <div class="form-group floating-label-form-group controls autocomplete">	
+				<input id="userName" type="text" th:field="*{userName}" placeholder="* nom d'utilisateur" th:class="${#fields.hasErrors('userName') ? 'form-control is-invalid' : 'form-control'}" required data-validation-required-message="S'il vous-plait entrer votre nom d'utilisateur." />
+				<div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" class="invalid-feedback"></div> 
+			</div> 
+		 </div>
+		 <div class="control-group">
+            <div class="form-group floating-label-form-group controls">		
+				<input type="password" th:field="*{passwordHash}" placeholder="* mot de passe" th:class="${#fields.hasErrors('passwordHash') ? 'form-control is-invalid' : 'form-control'}" required data-validation-required-message="S'il vous-plait entrer un mot de passe valide"/> 
+				<div th:if="${#fields.hasErrors('passwordHash')}" th:errors="*{passwordHash}" class="invalid-feedback"></div>
+			</div><!-- Password -->
+		 </div>
+
 		 <br>
 			<div class="form-group clearfix">
 				<button type="submit" class="btn btn-primary">Créer votre compte</button>
 			</div><!-- Submit Button -->
 			<div class="form-group">
 				<div th:class="${successMessage} ? 'alert alert-success' : ''" th:text="${successMessage}"></div>
+				<a th:if="${successMessage}" href="/login" th:href="@{/login}">Se connecter</a>
 			</div><!-- Success message -->
 		</form>		
 	</div>	
 	<footer th:replace="layout::site-footer"></footer>
+	<script type="text/javascript">
+ function autocomplete(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+     
+      var a, b, i, val = this.value;
+      if(val[val.length -1]=='@') {
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        //if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+              b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = inp.value+this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        //}
+      }
+      }
+  });
+  
+  
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+      x[i].parentNode.removeChild(x[i]);
+    }
+  }
+  
+}
+/*execute a function when someone clicks in the document:*/
+document.addEventListener("click", function (e) {
+    closeAllLists(e.target);
+});
+}
+var mailServers= ["gmail.com","hotmail.com","hotmail.fr","yahoo.com","yahoo.fr"];
+
+autocomplete(document.getElementById("userName"), mailServers);
+
+
+	</script>
 </body>
 </html>

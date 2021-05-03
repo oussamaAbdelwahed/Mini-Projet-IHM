@@ -9,26 +9,19 @@
 </a>
 	<header th:replace="layout::site-generic-nav"></header>
 	
-
-	
 	<div class="container" style="margin-top:80x;">	
-	 <h1 style="margin-bottom:50px;"><center>Tous les postes</center></h1>	
-	 
-	 <!-- SEARCH BAR-->
-	<div class="row">
-	 <form method="post" action="#" th:action="@{/posts/find}" class="input-group" style="margin-bottom:50px;">
-        <input style="height:60px;" type="search" class="form-control" placeholder="Vous pouvez chercher par : ID, Titre, Auteur" aria-label="Search"
-         aria-describedby="search-addon" name="search"/>
-        <button type="submit" class="btn btn-outline-primary">Chercher</button>
-	 </form>
+	<div class="form-group" th:if="${errorMessage}" >
+		<div class="alert alert-danger" style="margin-top:50x;" th:text="${errorMessage}"></div>
 	</div>
-		 <!--END SEARCH BAR-->
+	<h2 th:unless="${errorMessage}" style="margin-bottom:50px;text-align:center;">Résultat de recherche</h2>	
 	   
 	 <div class="card" th:each="p : ${posts}" style="margin-bottom:20px;">
         <img class="card-img" th:src="${p.imageURL}" alt="Bologna"/>
-        <div class="card-img-overlay">
-         <!-- <a href="#" class="btn btn-light btn-sm" th:href="@{'/posts/view/'+${p.id}}">Lire suite ...</a>-->
+        <!-- <div class="card-img-overlay">
+         <a href="#" class="btn btn-light btn-sm" th:href="@{'/posts/view/'+${p.id}}">Lire suite ...</a>
+        
         </div>
+        -->
         <div class="card-body">
           <h3 style="color:#0984e3;">ID:</h3>
           <h4 th:text="${p.id}"></h4>
@@ -62,38 +55,12 @@
         </div>
       </div>
 	   
-		
-		<div class="row">			
-			<div class="col-md-12">				
-				<ul class="pagination justify-content-center">
-				
-			        
-			        <li th:class="${posts.number eq 0} ? 'page-item disabled' : 'page-item'">
-			            <a class="page-link" th:if="${not posts.first}" th:href="@{${'/posts'}(page=${posts.number-1})}">&laquo;</a>
-			            <a class="page-link" th:if="${posts.first}" href="#">&laquo;</a>
-			        </li>
-			
-			        <li th:each="pageNo : ${#numbers.sequence(0, posts.totalPages - 1)}" th:class="${posts.number eq pageNo} ? 'page-item active' : 'page-item'">
-			            <a class="page-link" th:if="${posts.number  eq pageNo}" href="#">
-			                <span th:text="${pageNo + 1}"></span>
-			            </a>
-			            <a class="page-link" th:if="${not (posts.number  eq pageNo)}" th:href="@{${'/posts'}(page=${pageNo})}">
-			                <span th:text="${pageNo + 1}"></span>
-			            </a>
-			
-			        </li>
-			        <li th:class="${posts.number + 1 ge posts.totalPages} ? 'page-item disabled' : 'page-item'">
-			            <a class="page-link" th:if="${not posts.last}" th:href="@{${'/posts'}(page=${posts.number+1})}">&raquo;</a>
-			            <a class="page-link" th:if="${posts.last}" href="#">&raquo;</a>
-			        </li>
-				</ul><!-- ./ pagination -->								
-			</div><!-- ./ col-md-7 -->
-		</div><!-- ./ row -->
-	</div><!-- ./ container -->
+</div>
+	<!-- ./ container -->
 <!-- The footer coming from layout -->	
 <footer th:replace="layout::site-footer"></footer>	
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
 var btn = $('#button');
 

@@ -24,6 +24,12 @@ public class PostServiceJpa implements PostService {
 	
 	@Autowired
 	private PostRepository postRepository;
+	
+	
+	@Override
+	public List<Post> searchForPosts(String searchQuery) {
+		return this.postRepository.findByTitleContainingIgnoreCaseOrBodyContainingIgnoreCaseOrAuthorFullNameContainingIgnoreCaseOrAuthorLastNameContainingIgnoreCase(searchQuery, searchQuery, searchQuery, searchQuery);
+	}
 
 	@Override
 	public List<Post> findAll() {

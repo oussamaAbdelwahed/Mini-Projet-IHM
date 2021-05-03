@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Clean Blog - Start Bootstrap Theme</title>
+  <title>MINI-PROJET IHM</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -20,36 +20,19 @@
 
   <!-- Custom styles for this template -->
   <link href="css/clean-blog.min.css" rel="stylesheet">
+ <link  href="css/niceCountryInput.css" rel="stylesheet">
 
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+        crossorigin="anonymous">
+  </script>
 </head>
 
 <body>
 
   <!-- Navigation -->
   <nav th:replace="layout::site-nav" class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-    <!--  <div class="container">
-      <a class="navbar-brand" href="index.html">Start Bootstrap</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="about.html">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="post.html">Sample Post</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>-->
+    
   </nav>
 
   <!-- Page Header -->
@@ -71,42 +54,68 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <p>Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as possible!</p>
-        <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
-        <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
-        <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
-        <form name="sentMessage" id="contactForm" novalidate>
-          <div class="control-group">
+        <p> Vous souhaitez nous contacter? Remplissez le formulaire ci-dessous pour nous envoyer un message et nous vous répondrons dans les plus brefs délais!</p>
+ 
+        <form name="sentMessage" id="contactForm" novalidate autocomplete="off">
+         <div class="control-group">
             <div class="form-group floating-label-form-group controls">
-              <label>Name</label>
-              <input autofocus="autofocus" type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
+              <label>Nom</label>
+              <input autofocus="autofocus" type="text" class="form-control" name="lastname" placeholder="Nom" id="lastname" required data-validation-required-message="S'il vous plait entrer votre nom">
+              <p class="help-block text-danger"></p>
+            </div>
+         </div>
+          
+         <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Prenom</label>
+              <input type="text" class="form-control" name="firstname" placeholder="Prenom" id="firstname" required data-validation-required-message="S'il vous plait entrer votre prenom">
               <p class="help-block text-danger"></p>
             </div>
           </div>
+          
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
-              <label>Email Address</label>
-              <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
+              <label>Email</label>
+              <input type="email" class="form-control" placeholder="Adresse email " id="email" required data-validation-required-message="S'il vous plait entrer votre adresse email">
               <p class="help-block text-danger"></p>
             </div>
           </div>
+          
           <div class="control-group">
             <div class="form-group col-xs-12 floating-label-form-group controls">
-              <label>Phone Number</label>
-              <input type="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
+              <label>Numero de telephone</label>
+              <input type="tel" class="form-control" placeholder="Numero de telephone"   onfocus="this.value = this.value;"  id="phone"  >
               <p class="help-block text-danger"></p>
             </div>
           </div>
+
+        <!-- <div class="control-group"> -->
+        <div class="form-group">
+         <label for="countryIsoSelect">Votre pays</label>
+ 		  <div id="countryIsoSelect" class="example"
+    		 data-selectedcountry=""
+     		 data-showspecial="false"
+     		 data-showflags="true"
+     		 data-i18nall="All selected"
+             data-i18nnofilter="No selection"
+             data-i18nfilter="Filter"
+             data-onchangecallback="onChangeCallback">
+          </div>
+          </div>
+       <!-- </div> -->
+               
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
-              <label>Message</label>
-              <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
+              <label>Message ...</label>
+              <textarea rows="3" class="form-control" placeholder="Message ..." id="message" required data-validation-required-message="S'il vous plait entrer votre message a envoyer"></textarea>
               <p class="help-block text-danger"></p>
             </div>
           </div>
+          
           <br>
           <div id="success"></div>
-          <button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button>
+          <button type="submit" class="btn btn-primary" id="sendMessageButton">Envoyer</button>
+          <div style="visibility:hidden;" class="alert alert-success">Votre message a été bien envoyé.</div>
         </form>
       </div>
     </div>
@@ -157,11 +166,29 @@
 
   <!-- Contact Form JavaScript -->
   <script src="js/jqBootstrapValidation.js"></script>
-  <script src="js/contact_me.js"></script>
 
+ 
   <!-- Custom scripts for this template -->
   <script src="js/clean-blog.min.js"></script>
+  <script type="text/javascript">
+  //
+  var niceCountry="";
+  function onChangeCallback(ctr){
+     $("#phone").focus();
+     niceCountry = ctr;
+     $.ajax({url: "https://restcountries.eu/rest/v2/alpha/"+ctr, success: function(result){
+       $("#phone").val("+"+result.callingCodes[0]+" ");
+     }});
+  }
+  
+  $(function(){
+    niceCountry =  new NiceCountryInput($(".example")).init();
+  });
+  </script>
 
+  <script src="js/niceCountryInput.js"></script>
+
+  <script src="js/contact_me.js"></script>
 </body>
 
 </html>
