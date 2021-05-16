@@ -99,8 +99,8 @@
         <div class="card-body">
           <h4 class="card-title" th:text="${p.title}">Pasta with Prosciutto</h4>
           <small class="text-muted cat">
-            <i class="far fa-clock text-info"></i> 30 minutes
-            <i class="fas fa-users text-info"></i> 4 portions
+            <i class="far fa-clock text-info"></i> <a  href="">il y'a 30 minutes</a>
+           
           </small>
           <p class="card-text" th:utext="${p.body}" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">I love quick, simple pasta dishes, and this is one of my favorite.</p>
           <span th:if="${p.author}" th:remove="tag" class="post-meta"><i><b>Ecrit par</b></i>
@@ -110,7 +110,7 @@
 	         <span th:text="${#dates.format(p.date, 'dd-MMM-yyyy')}">22-May-2016</span>
           </span>
           <br><br>
-          <a href="#" class="btn btn-success btn-sm card-link"  th:href="@{'/posts/view/'+${p.id}}">Lire suite ...</a>
+          <a href="#" class="btn btn-success btn-sm card-link"   th:href="@{'/posts/view/'+${p.id}}">Lire suite ...</a>
         </div>
         <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
           <div class="views"><span th:text="${#dates.format(p.date, 'dd-MMM-yyyy')}">22-May-2016</span>
@@ -150,7 +150,8 @@
   </div>
 
   <hr>
-
+<a id="button"><i class="fas fa-arrow-up"></i>
+</a>
   <!-- Footer -->
   <footer th:replace="layout::site-footer">
    <!--  <div class="container">
@@ -194,7 +195,34 @@
 
  
   <script src="js/clean-blog.min.js"></script>
+  
 
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'fr'}, 'google_translate_element');
+}
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script type="text/javascript">
+var btn = $('#button');
+
+$(window).scroll(function() {
+  if ($(window).scrollTop() > 300) {
+    btn.addClass('show');
+  } else {
+    btn.removeClass('show');
+  }
+});
+
+btn.on('click', function(e) {
+  e.preventDefault();
+  $('html, body').animate({scrollTop:0}, '300');
+});
+
+
+</script>
 </body>
 
 </html>

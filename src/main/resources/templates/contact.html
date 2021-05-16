@@ -57,26 +57,28 @@
         <p> Vous souhaitez nous contacter? Remplissez le formulaire ci-dessous pour nous envoyer un message et nous vous répondrons dans les plus brefs délais!</p>
  
         <form name="sentMessage" id="contactForm" novalidate autocomplete="off">
+        <div class="control-group"><span class="text text-primary"> Les  champs précédés par * sont obligatoires</span></div>
+        
          <div class="control-group">
             <div class="form-group floating-label-form-group controls">
-              <label>Nom</label>
-              <input autofocus="autofocus" type="text" class="form-control" name="lastname" placeholder="Nom" id="lastname" required data-validation-required-message="S'il vous plait entrer votre nom">
+              <label>* Nom  </label>
+              <input autofocus="autofocus" type="text" class="form-control myInputs" name="lastname" placeholder="* Nom" id="lastname" required data-validation-required-message="S'il vous plait entrer votre nom">
               <p class="help-block text-danger"></p>
             </div>
          </div>
           
          <div class="control-group">
             <div class="form-group floating-label-form-group controls">
-              <label>Prenom</label>
-              <input type="text" class="form-control" name="firstname" placeholder="Prenom" id="firstname" required data-validation-required-message="S'il vous plait entrer votre prenom">
+              <label>* Prenom </label>
+              <input type="text" class="form-control myInputs" name="firstname" placeholder="* Prenom" id="firstname" required data-validation-required-message="S'il vous plait entrer votre prenom">
               <p class="help-block text-danger"></p>
             </div>
           </div>
           
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
-              <label>Email</label>
-              <input type="email" class="form-control" placeholder="Adresse email " id="email" required data-validation-required-message="S'il vous plait entrer votre adresse email">
+              <label>* Email</label>
+              <input type="email" class="form-control myInputs" placeholder="* Adresse email de la forme (pseudo@serveur.domaine) " id="email" required data-validation-required-message="S'il vous plait entrer votre adresse email">
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -106,15 +108,15 @@
                
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
-              <label>Message ...</label>
-              <textarea rows="3" class="form-control" placeholder="Message ..." id="message" required data-validation-required-message="S'il vous plait entrer votre message a envoyer"></textarea>
+              <label>* Message ...</label>
+              <textarea rows="3" class="form-control myInputs" placeholder="* Message ..." id="message"  data-validation-required-message="S'il vous plait entrer votre message a envoyer"></textarea>
               <p class="help-block text-danger"></p>
             </div>
           </div>
           
           <br>
           <div id="success"></div>
-          <button type="submit" class="btn btn-primary" id="sendMessageButton">Envoyer</button>
+          <button type="submit" class="btn btn-primary" id="sendMessageButton" disabled="disabled">Envoyer</button>
           <div style="visibility:hidden;" class="alert alert-success">Votre message a été bien envoyé.</div>
         </form>
       </div>
@@ -189,6 +191,29 @@
   <script src="js/niceCountryInput.js"></script>
 
   <script src="js/contact_me.js"></script>
+  <script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'fr'}, 'google_translate_element');
+}
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+	<script type="text/javascript">
+	   $(".myInputs").keyup(function(e){
+	      var inp1 = $("#lastname").val()
+	      var inp2 = $("#firstname").val()
+	      var inp3 = $("#email").val()
+	      var inp4 = $("#message").val()
+	      if(inp1.length > 0 &&  inp2.length >0 && inp3.length >0 && inp4.length >0){
+	          $("#sendMessageButton").prop("disabled", false);
+	      }else{
+	      	 $("#sendMessageButton").prop("disabled", true);
+	      
+	      }
+
+	   });
+	</script>
 </body>
 
 </html>

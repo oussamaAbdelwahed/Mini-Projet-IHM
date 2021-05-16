@@ -12,16 +12,17 @@
 	<div class="container" style="margin-top:100px;">
 	    <h2>Se connecter a votre compte Utilisateur</h2>
 		<form method="post" th:action="@{/users/login}" class="form col-md-5 col-md-offset-7" id="contactForm" novalidate>
+		<div class="control-group"><span class="text text-primary">* Les  deux champs sont obligatoires</span></div>
 		  <div class="control-group">
             <div class="form-group floating-label-form-group controls">
-		  	  <label for="userName">Nom d'utilisateur</label>
-		  	  <input autofocus="autofocus" placeholder="nom d'utilisateur" type="text" id="userName" name="userName" class="form-control" required data-validation-required-message="S'i vous-plait entrer votre nom d'utilisateur."/>
+		  	  <label for="userName">* Nom d'utilisateur</label>
+		  	  <input autofocus="autofocus" placeholder="* nom d'utilisateur" type="text" id="userName" name="userName" class="form-control myInputs" required data-validation-required-message="S'i vous-plait entrer votre nom d'utilisateur."/>
 		    </div><!-- User name -->	  
 		  </div>
 		  <div class="control-group">
 		    <div class="form-group floating-label-form-group controls">
-		  	 <label for="password">Mot de passe </label>
-		  	 <input placeholder="mot de passe" type="password" id="passwordHash" name="passwordHash" class="form-control" required data-validation-required-message="S'i vous-plait entrer votre mot de passe."/>		  	
+		  	 <label for="password">* Mot de passe </label>
+		  	 <input placeholder="* mot de passe" type="password" id="passwordHash" name="passwordHash" class="form-control myInputs" required data-validation-required-message="S'i vous-plait entrer votre mot de passe."/>		  	
 		    </div><!-- Password -->		  
 		  </div>
 		 
@@ -35,7 +36,7 @@
 		   <br>
           <div id="success"></div>
 		  <div class="form-group">
-		  	<input type="submit" class="btn btn-primary pull-right" id="submit" value="Se connecter"/>
+		  	<input type="submit" class="btn btn-primary pull-right" id="submit" disabled="disabled" value="Se connecter"/>
 		  	<br>
 		  	<a href="register.html" th:href="@{/users/register}">[Créer un compte ]</a>
 		  </div><!-- Submit Button -->		  
@@ -83,5 +84,26 @@ function doJOB() {
   }
 }
 </script>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'fr'}, 'google_translate_element');
+}
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+	<script type="text/javascript">
+	   $(".myInputs").keyup(function(e){
+	      var inp1 = $("#userName").val()
+	      var inp2 = $("#passwordHash").val()
+	      if(inp1.length > 0 &&  inp2.length >0){
+	          $("#submit").prop("disabled", false);
+	      }else{
+	      	 $("#submit").prop("disabled", true);
+	      }
+
+	   });
+	</script>
 </body>
 </html>

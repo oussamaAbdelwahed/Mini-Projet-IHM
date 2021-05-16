@@ -98,17 +98,19 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav mr-2">
           <li class="nav-item">
-            <a class="nav-link" href="new-index.html" th:href="@{/}">Accueil</a>
+            <a class="nav-link" href="new-index.html" th:href="@{/}" data-toggle="tooltip" data-placement="top" title="Page d'accueil du site">Accueil</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="posts/index.html" th:href="@{/posts}">Postes</a>
+            <a class="nav-link" href="posts/index.html" th:href="@{/posts}" data-toggle="tooltip" data-placement="top" title="Consulter tous les postes">Postes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="about.html" th:href="@{/about}">A propos</a>
+            <a class="nav-link" href="about.html" th:href="@{/about}" data-toggle="tooltip" data-placement="top" title="Lire a propos de nous">A propos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="contact.html" th:href="@{/contact}">Contact</a>
+            <a class="nav-link" href="contact.html" th:href="@{/contact}" data-toggle="tooltip" data-placement="top" title="Contactez nous">Contact</a>
           </li>
+
+      
           <!--  <li class="nav-item">
         	<span sec:authorize="isAuthenticated()">
 				<a class="nav-link"  href="posts/create.html" th:href="@{/posts/create}">Créer un poste</a>
@@ -127,14 +129,17 @@
 		  </span>
 		</li>
 		<li class="nav-item">
-		   <a sec:authorize="isAuthenticated()" class="nav-link"  ref="#" th:href="@{/users/logout}"><span class="fa fa-sign-out"></span>&nbsp;[Se Déconnecter]</a>
+		   <a data-toggle="tooltip" data-placement="top" title="Fermer la session" sec:authorize="isAuthenticated()" class="nav-link"  ref="#" th:href="@{/users/logout}" style="color:lightgreen;"><span class="fa fa-sign-out"></span>&nbsp;[Se Déconnecter]</a>
 		</li>
 		<li class="nav-item">
-		  <a sec:authorize="!isAuthenticated()" class="nav-link"  href="users/login.html" th:href="@{/users/login}">Se Connecter</a>
+		  <a sec:authorize="!isAuthenticated()" class="nav-link"  href="users/login.html" th:href="@{/users/login}" style="color:lightgreen;">Se Connecter</a>
 		</li>
 		<li class="nav-item">
-		  <a sec:authorize="!isAuthenticated()" class="nav-link"  href="users/register.html" th:href="@{/users/register}">Créer un compte</a>
+		  <a sec:authorize="!isAuthenticated()" class="nav-link"  href="users/register.html" th:href="@{/users/register}" style="color:lightgreen;">Créer un compte</a>
 		</li>
+		<li id="google_translate_element" >
+           
+       </li>
 	 </ul>	
       </div>
     </div>
@@ -152,13 +157,13 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav mr-2">
           <li class="nav-item">
-           <a class="nav-link" href="new-index.html" th:href="@{/}">Accueil</a>
+           <a class="nav-link" href="new-index.html" th:href="@{/}" data-toggle="tooltip" data-placement="top" title="Page d'accueil du site">Accueil</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="posts/index.html" th:href="@{/posts}">Postes</a>
+            <a class="nav-link" href="posts/index.html" th:href="@{/posts}" data-toggle="tooltip" data-placement="top" title="Consulter ous les postes">Postes</a>
           </li>
              <li class="nav-item">
-            <a class="nav-link" href="about.html" th:href="@{/about}">A propos</a>
+            <a class="nav-link" href="about.html" th:href="@{/about}" data-toggle="tooltip" data-placement="top" title="Lire a propos de nous">A propos</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="contact.html" th:href="@{/contact}">Contact</a>
@@ -171,14 +176,17 @@
 		  </span>
 		 </li>
 		 <li class="nav-item">
-		   <a sec:authorize="isAuthenticated()" class="nav-link"  ref="#" th:href="@{/users/logout}"><span class="fa fa-sign-out"></span>&nbsp;[Se Déconnecter]</a>
+		   <a sec:authorize="isAuthenticated()" class="nav-link"  ref="#" th:href="@{/users/logout}" style="color:lightgreen;"><span class="fa fa-sign-out"></span>&nbsp;[Se Déconnecter]</a>
 		 </li>
 		 <li class="nav-item">
-		  <a sec:authorize="!isAuthenticated()" class="nav-link"  href="users/login.html" th:href="@{/users/login}">Se Connecter</a>
+		  <a sec:authorize="!isAuthenticated()" class="nav-link"  href="users/login.html" th:href="@{/users/login}" style="color:lightgreen;">Se Connecter</a>
 		 </li>
 		 <li class="nav-item">
-		  <a sec:authorize="!isAuthenticated()" class="nav-link"  href="users/register.html" th:href="@{/users/register}">Créer un compte</a>
+		  <a sec:authorize="!isAuthenticated()" class="nav-link"  href="users/register.html" th:href="@{/users/register}" style="color:lightgreen;">Créer un compte</a>
 		 </li>
+		 <li id="google_translate_element" >
+           
+        </li>
 	   </ul>	
       </div>
     </div>
@@ -264,7 +272,7 @@
         <hr>
         <!-- Pager -->
         <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+          <a class="btn btn-primary float-right" href="#">Ancien Posts &rarr;</a>
         </div>
       </div>
     </div>
@@ -279,7 +287,7 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <ul class="list-inline text-center">
             <li class="list-inline-item">
-              <a href="#">
+              <a data-toggle="tooltip" data-placement="top" title="Trouver nous sur Twitter" href="https://twitter.com/?lang=fr" target="_blank">
                 <span class="fa-stack fa-lg">
                   <i class="fas fa-circle fa-stack-2x"></i>
                   <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
@@ -287,7 +295,7 @@
               </a>
             </li>
             <li class="list-inline-item">
-              <a href="#">
+              <a href="https://www.facebook.com/oussama.j.abdelwahed/" target="_blank" data-toggle="tooltip" data-placement="top" title="Trouver nous sur Facebook">
                 <span class="fa-stack fa-lg">
                   <i class="fas fa-circle fa-stack-2x"></i>
                   <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
@@ -295,7 +303,7 @@
               </a>
             </li>
             <li class="list-inline-item">
-              <a href="#">
+              <a href="https://github.com/oussamaAbdelwahed" target="_blank" data-toggle="tooltip" data-placement="top" title="Trouver nous sur Github">
                 <span class="fa-stack fa-lg">
                   <i class="fas fa-circle fa-stack-2x"></i>
                   <i class="fab fa-github fa-stack-1x fa-inverse"></i>
